@@ -1,0 +1,29 @@
+nav {
+  text-align: center;
+  display: inline-flex;
+  width: 100vw;
+
+  background-color: #eee;
+}
+
+nav > div {
+  width: 100%;
+  display: flex;
+
+}
+
+nav > div > a {
+  font-size: 20px;
+  text-decoration: none;
+  width: 100%;
+}
+
+nav > div > a:hover {
+  background-color: #aaa;
+  color: white;
+}
+
+#banner {
+  text-align: center;
+  font-size: 40px;
+}
