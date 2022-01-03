@@ -1,9 +1,14 @@
+header {
+  background-color: lightgray;
+  padding-bottom: 5px;
+}
+
 nav {
+  margin: 5px 0;
   text-align: center;
   display: inline-flex;
-  width: 100vw;
+  width: 100%;
 
-  background-color: #eee;
 }
 
 nav > div {
@@ -19,8 +24,8 @@ nav > div > a {
 }
 
 nav > div > a:hover {
-  background-color: #aaa;
-  color: white;
+  background-color: #eee;
+  transition-duration: 0.5s;
 }
 
 #banner {
