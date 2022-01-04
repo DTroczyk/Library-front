@@ -1,0 +1,22 @@
+.register {
+  width: fit-content;
+  border: solid black 1px;
+  border-radius: 5px;
+  box-shadow: 3px 3px #aaa;
+  margin: 10px auto;
+}
+
+.register-form > input {
+  margin: 3px 10px;
+}
+
+.register-form > label {
+  text-align: left;
+  width: 150px;
+  margin: 3px 10px;
+  float: left;
+}
+
+.register-form > button {
+  margin: 3px;
+}
