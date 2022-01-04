@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import './Login.css'
+
 const Login = () => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -25,9 +27,9 @@ const Login = () => {
 
 
   return (
-    <div>
+    <div className='login'>
       <h2>Zaloguj się</h2>
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} className='login-form'>
         <label htmlFor="">Login:</label>
         <input type="text" onChange={handleLoginChange} value={usernameInput}/>
         <br/>

@@ -2,6 +2,8 @@ import React from 'react'
 
 import './Item.css'
 
+import image from './default-image.jpg'
+
 const BoardGame = {
   author: '',
   authorId: 0,
@@ -44,7 +46,7 @@ const Item = () => {
 
   return (
     <div className='item-preview' title={itemType()}>
-      <div className='item-image'><img alt='Okładka'/></div>
+      <div className='item-image'><img src={image} alt='Okładka'/></div>
       <div className='item-name'>Terraformacja Marsa</div>
     </div>
   )
