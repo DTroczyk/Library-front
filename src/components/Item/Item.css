@@ -1,3 +1,9 @@
+.item-preview:hover {
+  background-color: #eee;
+  transform: translate3d(2px, 2px, 2px);
+  transition-duration: 0.5s;
+}
+
 .item-preview {
   border: black solid 1px;
   border-radius: 15px;
@@ -15,10 +21,21 @@
   overflow:hidden
 }
 
-.item-preview:hover {
-  background-color: #eee;
-  transform: translate3d(2px, 2px, 2px);
-  transition-duration: 0.5s;
+.item-preview.click {
+  border: black solid 1px;
+  border-radius: 15px;
+  box-shadow: 3px 3px #aaa;
+  cursor: pointer;
+
+  padding-left: 12px;
+  padding-right: 12px;
+
+  height: 23vh;
+  width: 20vh;
+  margin-block: 10px;
+  margin-inline: auto;
+
+  overflow:hidden
 }
 
 .item-image {

@@ -2,42 +2,20 @@ import React from 'react'
 
 import './Item.css'
 
-import image from './default-image.jpg'
+import bookImage from './default-book-image.png'
+import gameImage from './default-game-image.png'
 
-const BoardGame = {
-  author: '',
-  authorId: 0,
-  id: 0,
-  title: '',
-  description: '',
-  photo: '',
-  language: '',
-  yearOfRelease: 2010,
-  publishingHouse: '',
-  type: 'BoardGame',
-  owner: '',
-  ownerId: 0,
-  shelfId: '',
-  isPrivate: false,
-  
-  minPlayers: 1,
-  maxPlayers: 5,
-  length: '2h',
-  minAge: 16,
-  
-  isBorrowed: false,
-  isToLet: true,
-  borrower: '',
-  borrowerId: 0,
-}
-
-const Item = () => {
+const Item = props => {
+  const {item, details} = props;
+  var image;
 
   const itemType = () => {
-    switch (BoardGame.type) {
+    switch (item.type) {
       case 'BoardGame':
+        image = gameImage;
         return 'Gra Planszowa'
       case 'Book':
+        image = bookImage;
         return 'Książka'
       default:
         return 'Nieznany typ'
@@ -45,9 +23,9 @@ const Item = () => {
   }
 
   return (
-    <div className='item-preview' title={itemType()}>
+    <div className='item-preview' title={itemType()} onClick={() => details(item.id)}>
       <div className='item-image'><img src={image} alt='Okładka'/></div>
-      <div className='item-name'>Terraformacja Marsa</div>
+      <div className='item-name'>{item.title}</div>
     </div>
   )
 }
