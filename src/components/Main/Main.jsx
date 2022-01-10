@@ -27,7 +27,7 @@ const Main = () => {
       setCurrentItem({});
       setIsDetailsVisible(false);
     }
-  })
+  }, [itemId])
 
   const showDetails = (item) => {
     setCurrentItem(item);
