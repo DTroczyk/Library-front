@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ItemDetails from '../ItemDetails/ItemDetails';
+import AddOrEditItem from '../AddOrEditItem/AddOrEditItem';
 
 import Login from '../Login/Login';
 import Main from '../Main/Main';
@@ -15,6 +15,7 @@ const Content = () => {
         <Route element={<Login/>}  path="/login"/>
         <Route element={<Register/>} path="/register"/>
         <Route element={<Main/>} path="/item/:itemId"/>
+        <Route element={<AddOrEditItem/>} path="/additem"/>
         <Route element={<NotFoundPage/>} path="/*"/>
       </Routes>
     </main>

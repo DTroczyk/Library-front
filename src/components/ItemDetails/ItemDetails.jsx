@@ -34,6 +34,7 @@ const ItemDetails = props => {
           <li>Rok wydania: {item.yearOfRelease}</li>
           <li>Wydawnictwo: {item.publishingHouse}</li>
           {detailsOfType()}
+          <li>Język: {item.language}</li>
         </ul>
         <h4>Opis:</h4>
         {item.description}
