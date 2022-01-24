@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+
+import { addItem, editItem } from '../../actions/itemActions';
 
 import "./AddOrEditItem.css"
 
-const AddOrEditItem = () => {
+const AddOrEditItem = ({item}) => {
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputDescription, setInputDescription] = useState("");
   const [inputDuration, setInputDuration] = useState("");
@@ -17,6 +20,8 @@ const AddOrEditItem = () => {
   const [inputPubHouse, setInputPubHouse] = useState("");
   const [inputTitle, setInputTitle] = useState("");
   const [inputYear, setInputYear] = useState(2000);
+
+  const dispatch = useDispatch();
   
   const handleChangeAuthor = event => setInputAuthor(event.target.value);
   const handleChangeDescription = event => setInputDescription(event.target.value);
@@ -35,6 +40,30 @@ const AddOrEditItem = () => {
 
   const handleOnSubmit = event => {
     event.preventDefault();
+    
+    const itemObject = {
+      author: inputAuthor,
+      title: inputTitle,
+      description: inputDescription,
+      photo: "none",
+      language: inputLanguage,
+      year: inputYear,
+      publishingHouse: inputPubHouse,
+      type: inputItemType,
+      owner: "Tymczasowy Gość",
+      ownerId: 109,
+      shelfId: 101,
+      isPrivate: inputIsVisible,
+      pages: inputPages,
+      minPlayers: inputMinPlayers,
+      maxPlayers: inputMaxPlayers,
+      length: inputDuration,
+      minAge: inputMinAge,
+      isToLet: inputIsToLet
+    }
+
+    // item.id ? dispatch(addItem(itemObject)) : dispatch(editItem(itemObject));
+    dispatch(addItem(itemObject))
   }
   
   const currentYear = new Date().getFullYear();

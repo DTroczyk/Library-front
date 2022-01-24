@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Item from '../Item/Item';
@@ -6,18 +7,16 @@ import ItemDetails from '../ItemDetails/ItemDetails';
 
 import './Main.css'
 
-import { tempData } from '../../temp/TempData';
-
 const Main = () => {
   const [currentItem, setCurrentItem] = useState({});
-  const [data, setData] = useState(tempData);
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
+  const items = useSelector(store => store.items);
   const {itemId} = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (itemId) {
-      const item = tempData.find(current => current.id == itemId);
+      const item = items.find(current => current.id === parseInt(itemId));
       if (item && !item.isPrivate) {
         showDetails(item);
       } else {
@@ -40,7 +39,7 @@ const Main = () => {
     navigate("/");
   }
 
-  const itemList = data.map(current => <Item key={current.id} item={current} details={details}/>)
+  const itemList = items.map(current => <Item key={current.id} item={current} details={details}/>)
 
   return (
     <div>
