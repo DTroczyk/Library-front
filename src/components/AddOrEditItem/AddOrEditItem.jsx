@@ -40,20 +40,29 @@ const AddOrEditItem = ({item}) => {
 
   const handleOnSubmit = event => {
     event.preventDefault();
+
+    const typeOfItem = () => {
+      if (inputItemType === "Książka") {
+        return "Book"
+      } else if (inputItemType === "Gra planszowa") {
+        return "BoardGame"
+      }
+      return "";
+    }
     
     const itemObject = {
       author: inputAuthor,
       title: inputTitle,
       description: inputDescription,
-      photo: "none",
+      photo: "",
       language: inputLanguage,
       year: inputYear,
       publishingHouse: inputPubHouse,
-      type: inputItemType,
+      type: typeOfItem(),
       owner: "Tymczasowy Gość",
       ownerId: 109,
       shelfId: 101,
-      isPrivate: inputIsVisible,
+      isPrivate: !inputIsVisible,
       pages: inputPages,
       minPlayers: inputMinPlayers,
       maxPlayers: inputMaxPlayers,

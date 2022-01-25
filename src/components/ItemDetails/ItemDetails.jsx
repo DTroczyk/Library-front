@@ -26,12 +26,13 @@ const ItemDetails = props => {
     <>
     <div className='item-details' onClick={hide}/>
     <div className='item-details-window'>
+    <div className='item-details-close' onClick={hide}>X</div>
       <h3 className='item-details-title'>{item.title}</h3>
       <div>Autor: {item.author}</div>
       <div className='item-details-content'>
         <h4>Szczegóły:</h4>
         <ul>
-          <li>Rok wydania: {item.yearOfRelease}</li>
+          <li>Rok wydania: {item.year}</li>
           <li>Wydawnictwo: {item.publishingHouse}</li>
           {detailsOfType()}
           <li>Język: {item.language}</li>
@@ -40,7 +41,6 @@ const ItemDetails = props => {
         {item.description}
         <h4>Właściciel: {item.owner}</h4>
       </div>
-      <div className='item-details-close' onClick={hide}>X</div>
     </div>
     </>
   )
