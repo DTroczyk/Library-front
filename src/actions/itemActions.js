@@ -1,6 +1,6 @@
-export const ADD = 'ADD';
-export const DELETE = 'DELETE';
-export const EDIT = 'EDIT';
+export const ITEM_ADD = 'ADD';
+export const ITEM_DELETE = 'DELETE';
+export const ITEM_EDIT = 'EDIT';
 
 export const addItem = ({
   author,
@@ -22,7 +22,7 @@ export const addItem = ({
   minAge,
   isToLet,
 }) => ({
-  type: ADD,
+  type: ITEM_ADD,
   payload: {
     author,
     id: 0,
@@ -47,7 +47,7 @@ export const addItem = ({
 })
 
 export const deleteItem = id => ({
-  type: DELETE,
+  type: ITEM_DELETE,
   payload: {
     id,
   }
@@ -74,7 +74,7 @@ export const editItem = ({
   minAge,
   isToLet,
 }) => ({
-  type: EDIT,
+  type: ITEM_EDIT,
   payload: {
     author,
     id,
