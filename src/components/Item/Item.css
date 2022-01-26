@@ -15,8 +15,8 @@
 
   height: 25vh;
   width: 20vh;
-  margin-block: 10px;
-  margin-inline: auto;
+  float: left;
+  margin: 10px auto;
 
   overflow:hidden;
 }

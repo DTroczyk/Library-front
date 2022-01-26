@@ -17,7 +17,7 @@ const Header = () => {
   }
 
   const isUserLogged = () => {
-    if (user.id) {
+    if (user.username) {
       return (
         <>
           <div><Link to='/panel'>Panel</Link></div>

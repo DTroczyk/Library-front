@@ -5,7 +5,6 @@ export const userReducer = (state = {}, action) => {
     case USER_LOG_IN:
       return ({
         username: 'DTroczyk',
-        id: 1,
         name: 'Dominik',
         surname: 'Tracz',
         email: 'DTroczyk@gmail.com'
