@@ -1,0 +1,62 @@
+.panel {
+  display: flex;
+}
+
+.panel-menu {
+  min-width: 250px;
+  height: fit-content;
+  border: solid black 1px;
+  border-radius: 5px;
+  box-shadow: 3px 3px #aaa;
+  margin: 5px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.panel-menu div {
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+}
+
+.panel-menu div:nth-child(even) {
+  background-color: #ddd;
+}
+
+.panel-menu div:nth-child(odd) {
+  background-color: #bbb;
+}
+
+.panel-menu div:hover {
+  background-color: #aaa;
+}
+
+.panel-menu a {
+  width: 100%;
+  padding: 8px 0px;
+}
+
+.panel-menu .active {
+  background-color: gray;
+}
+
+.panel-content {
+  margin: 5px 20px;
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  .panel {
+    display: initial;
+  }
+
+  .panel-menu {
+    width: 99%;
+    margin: 1px auto;
+  }
+
+  .panel-content {
+    margin: 10px auto;
+    width: 99%;
+  }
+}
