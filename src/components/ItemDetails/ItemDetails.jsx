@@ -1,9 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import './ItemDetails.css'
 
-const ItemDetails = props => {
-  const {hide, item} = props;
+const ItemDetails = () => {
+  const {itemId} = useParams();
+  const item = useSelector(store => store.items).find(obj => obj.id === Number(itemId));
+  const navigate = useNavigate();
 
   const detailsOfType = () => {
     if (item.type === "Book") {
@@ -21,12 +25,13 @@ const ItemDetails = props => {
       )
     }
   }
+  const handleClick = () => navigate('/');
 
   return (
     <>
-    <div className='item-details' onClick={hide}/>
+    <div className='item-details' onClick={handleClick}/>
     <div className='item-details-window'>
-    <div className='item-details-close' onClick={hide}>X</div>
+    <div className='item-details-close' onClick={handleClick}>X</div>
       <h3 className='item-details-title'>{item.title}</h3>
       <div>Autor: {item.author}</div>
       <div className='item-details-content'>
