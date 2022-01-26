@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../actions/userActions';
 
 import './Login.css'
 
 const Login = () => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleForgotPassword = () => {
     alert('Nie zaimplementowano')
@@ -18,10 +24,8 @@ const Login = () => {
       return
     }
 
-    alert(`Wysyłam dane:
-    Login: ${usernameInput}
-    Hasło: ${passwordInput}
-    Nie zaimplementowano logowania`)
+    dispatch(loginUser(usernameInput, passwordInput));
+    navigate('/');
   }
   const handlePasswordChange = event => setPasswordInput(event.target.value);
 
