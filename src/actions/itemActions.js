@@ -1,6 +1,7 @@
-export const ITEM_ADD = 'ADD';
-export const ITEM_DELETE = 'DELETE';
-export const ITEM_EDIT = 'EDIT';
+export const ITEM_ADD = 'ITEM_ADD';
+export const ITEM_DELETE = 'ITEM_DELETE';
+export const ITEM_EDIT = 'ITEM_EDIT';
+export const ITEMS_SET = 'ITEMS_SET';
 
 export const addItem = ({
   author,
@@ -95,5 +96,12 @@ export const editItem = ({
     length,
     minAge,
     isToLet,
+  }
+})
+
+export const setItems = (items) => ({
+  type: ITEMS_SET,
+  payload: {
+    items
   }
 })

@@ -1,8 +1,8 @@
-import {ITEM_ADD, ITEM_EDIT, ITEM_DELETE } from '../actions/itemActions'
+import {ITEM_ADD, ITEM_EDIT, ITEM_DELETE, ITEMS_SET } from '../actions/itemActions'
 
 import { tempData } from '../temp/TempData';
 
-export const itemReducer = (state = tempData, action) => {
+export const itemReducer = (state = [], action) => {
   switch (action.type) {
     case ITEM_ADD:
       return [...state, action.payload];
@@ -58,6 +58,8 @@ export const itemReducer = (state = tempData, action) => {
     case ITEM_DELETE:
       return state.filter(currentStateElement => 
         currentStateElement.id !== action.payload.id);
+    case ITEMS_SET:
+      return action.payload.items;
 
     default:
       console.warn(`Don't have the action: ${action.type} in itemReducer`);
