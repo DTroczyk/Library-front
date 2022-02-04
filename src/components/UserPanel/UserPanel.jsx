@@ -5,17 +5,15 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import './UserPanel.css'
 
 const UserPanel = () => {
-  const user = useSelector(store => store.user);
   const navigate = useNavigate()
 
   useEffect(() => {
-    
-    if (!user.username) {
+    if (!localStorage.getItem('token')) {
       navigate('/login')
     } else {
       navigate('items');
     }
-  }, [])
+  }, []);
 
   return (
     <div className='panel'>

@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom'
 
 import { setItems } from '../../actions/itemActions';
 
+import { API_URL } from '../../temp/TempURL';
+
 import AddOrEditItem from '../AddOrEditItem/AddOrEditItem';
 import Login from '../Login/Login';
 import ItemDetails from '../ItemDetails/ItemDetails';
@@ -12,19 +14,18 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Register from '../Register/Register';
 import UserPanel from '../UserPanel/UserPanel';
 import UserItems from '../UserItems/UserItems';
-import { API_URL } from '../../temp/TempURL';
+import { useIsUserLogged } from '../../hooks/useIsUserLogged';
 
 const Content = () => {
-  var dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const loginUser = useIsUserLogged();
 
   useEffect(() => {
     fetch(API_URL + '/item')
       .then(response => response.json())
-      .then(data => dispatch(setItems(data)));
-
-    if (localStorage.getItem('token') != null) {
-      console.log("User is logged in.")
-    }
+      .then(data => {
+        dispatch(setItems(data));
+      });
   }, [])
 
   return (

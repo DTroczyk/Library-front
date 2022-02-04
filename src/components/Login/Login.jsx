@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../actions/userActions';
+import { useIsUserLogged } from '../../hooks/useIsUserLogged';
+
+import { API_URL } from '../../temp/TempURL';
 
 import './Login.css'
 
@@ -9,7 +10,7 @@ const Login = () => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
-  const dispatch = useDispatch();
+  const loginUser = useIsUserLogged();
   const navigate = useNavigate();
 
   const handleForgotPassword = () => {
@@ -24,8 +25,22 @@ const Login = () => {
       return
     }
 
-    dispatch(loginUser(usernameInput, passwordInput));
-    navigate('/');
+    var url = API_URL + `/login?login=${usernameInput}&password=${passwordInput}`;
+
+    fetch(url)
+      .then(response => {
+          if (response.status !== 200) {
+            throw new Error();
+          }
+          return response.json();
+      }).then(data => {
+        var token = data.token;
+        localStorage.setItem('token', token);
+        setPasswordInput('');
+        setUsernameInput('');
+        navigate('/');
+      })
+      .catch(er => console.log("Access Denied"));
   }
   const handlePasswordChange = event => setPasswordInput(event.target.value);
 
