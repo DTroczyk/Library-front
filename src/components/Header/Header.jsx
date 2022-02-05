@@ -20,7 +20,7 @@ const Header = () => {
     if (user.username) {
       return (
         <>
-          <div><Link to='/panel'>Panel</Link></div>
+          <div><Link to='/panel/items'>Panel</Link></div>
           <div><Link to='/' onClick={handleClick}>Wyloguj</Link></div>
         </>
       )
