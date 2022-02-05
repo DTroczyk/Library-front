@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom'
+import jwtDecode from 'jwt-decode';
 
 import { setItems } from '../../actions/itemActions';
+import { loginUser } from '../../actions/userActions';
 
 import { API_URL } from '../../temp/TempURL';
 
@@ -14,11 +16,9 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Register from '../Register/Register';
 import UserPanel from '../UserPanel/UserPanel';
 import UserItems from '../UserItems/UserItems';
-import { useIsUserLogged } from '../../hooks/useIsUserLogged';
 
 const Content = () => {
   const dispatch = useDispatch();
-  const loginUser = useIsUserLogged();
 
   useEffect(() => {
     fetch(API_URL + '/item')
@@ -26,6 +26,26 @@ const Content = () => {
       .then(data => {
         dispatch(setItems(data));
       });
+
+    const token = localStorage.getItem('token')
+
+    if (token != null) {
+      const user = jwtDecode(token);
+
+      if (user.exp > Date.now()) {
+        localStorage.removeItem('token');
+      }
+      else {
+        fetch(API_URL + '/user', {
+          method: 'get',
+          headers: new Headers({
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          })
+        }).then(response => response.json())
+        .then(data => dispatch(loginUser(data)));
+      }
+    }
+
   }, [])
 
   return (

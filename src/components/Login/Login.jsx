@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useIsUserLogged } from '../../hooks/useIsUserLogged';
+import { loginUser } from '../../actions/userActions';
 
 import { API_URL } from '../../temp/TempURL';
 
@@ -10,8 +12,12 @@ const Login = () => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
-  const loginUser = useIsUserLogged();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null) navigate('/panel/items');
+  }, [])
 
   const handleForgotPassword = () => {
     alert('Nie zaimplementowano')
@@ -36,6 +42,7 @@ const Login = () => {
       }).then(data => {
         var token = data.token;
         localStorage.setItem('token', token);
+        dispatch(loginUser(data.user));
         setPasswordInput('');
         setUsernameInput('');
         navigate('/');
