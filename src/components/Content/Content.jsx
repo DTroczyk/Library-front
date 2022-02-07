@@ -58,7 +58,9 @@ const Content = () => {
         <Route element={<Register/>} path="/register"/>
         <Route element={<AddOrEditItem/>} path="/additem"/>
         <Route element={<UserPanel/>} path="panel">
-          <Route path="items" element={<UserItems/>}/>
+          <Route path="items" element={<UserItems/>}>
+            <Route path=":itemId" element={<ItemDetails/>}/>
+          </Route>
           <Route path="setting" element={<Register/>}/>
           <Route path="loans" element={<AddOrEditItem/>}/>
         </Route>

@@ -25,7 +25,7 @@ const ItemDetails = () => {
       )
     }
   }
-  const handleClick = () => navigate('/');
+  const handleClick = () => navigate('../.');
 
   return (
     <>

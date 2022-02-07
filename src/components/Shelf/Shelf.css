@@ -1,0 +1,34 @@
+.shelf {
+  border: solid black 1px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.shelf-title {
+  background-color: #aaa;
+  border-bottom: solid black 1px;
+  padding: 2px;
+  font-size: 20px;
+}
+
+.shelf-items {
+  font-size: 16px;
+}
+
+.shelf-items > div {
+  height: 25px;
+}
+
+.shelf-items > div:nth-child(even) {
+  background-color: #eee;
+}
+
+.shelf-items > div:nth-child(odd) {
+  background-color: #ddd;
+} 
+
+.shelf-items > div:hover {
+  background-color: #aaa;
+  cursor: pointer;
+  transition: .2s;
+}

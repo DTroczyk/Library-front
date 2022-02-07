@@ -1,16 +1,25 @@
 import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
-import SmallItem from '../SmallItem/SmallItem';
+import { Outlet } from 'react-router-dom';
+import Shelf from '../Shelf/Shelf';
 
 const UserItems = () => {
   const user = useSelector(store => store.user);
-  const items = useSelector(store => store.items).filter(item => item.ownerId === user.username);
+  const shelves = user.shelves;
+  const [userItems, setUserItems] = useState([]);
 
-  const userItems = items.map(item => <SmallItem key={item.id} item={item}/>)
+  useEffect(() => {
+    if (shelves) {
+      setUserItems(shelves.map(shelf => <Shelf key={shelf.id} shelf={shelf}/>));
+    }
+  }, [user])
 
   return (
     <div>
       {userItems}
+      <Outlet/>
     </div>
   )
 }
