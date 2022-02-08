@@ -60,6 +60,7 @@ const Content = () => {
         <Route element={<UserPanel/>} path="panel">
           <Route path="items" element={<UserItems/>}>
             <Route path=":itemId" element={<ItemDetails/>}/>
+            <Route path="edit/:itemId" element={<AddOrEditItem/>}/>
           </Route>
           <Route path="setting" element={<Register/>}/>
           <Route path="loans" element={<AddOrEditItem/>}/>

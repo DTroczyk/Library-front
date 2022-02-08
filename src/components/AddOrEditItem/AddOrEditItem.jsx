@@ -1,15 +1,24 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { addItem, editItem } from '../../actions/itemActions';
+import { API_URL } from '../../temp/TempURL';
 
 import "./AddOrEditItem.css"
 
-const AddOrEditItem = ({item}) => {
+const AddOrEditItem = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [item, setItem] = useState(undefined);
+  const user = useSelector(store => store.user);
+  const {itemId} = useParams();
+
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputDescription, setInputDescription] = useState("");
   const [inputDuration, setInputDuration] = useState("");
-  const [inputIsToLet, setInputIsToLet] = useState(false);
+  const [inputIsToLet, setInputIsToLet] = useState(true);
   const [inputIsVisible, setInputIsVisible] = useState(true);
   const [inputItemType, setInputItemType] = useState("")
   const [inputLanguage, setInputLanguage] = useState("Polski");
@@ -18,6 +27,7 @@ const AddOrEditItem = ({item}) => {
   const [inputMinAge, setInputMinAge] = useState(5);
   const [inputPages, setInputPages] = useState(1);
   const [inputPubHouse, setInputPubHouse] = useState("");
+  const [inputShelf, setInputShelf] = useState(1);
   const [inputTitle, setInputTitle] = useState("");
   const [inputYear, setInputYear] = useState(2000);
 
@@ -35,20 +45,47 @@ const AddOrEditItem = ({item}) => {
   const handleChangeMinAge = event => setInputMinAge(event.target.value);
   const handleChangePages = event => setInputPages(event.target.value);
   const handleChangePubHouse = event => setInputPubHouse(event.target.value);
+  const handleChangeShelf = event => setInputShelf(event.target.value)
   const handleChangeTitle = event => setInputTitle(event.target.value);
   const handleChangeYear = event => setInputYear(event.target.value);
 
+  const setInputData = (newItem) => {
+    const loadedShelfId = user.shelves.find(shelf => shelf.title === newItem.shelf.title);
+    
+    setInputAuthor(newItem.author);
+    setInputDescription(newItem.description);
+    setInputDuration(newItem.length);
+    setInputIsToLet(newItem.isToLet);
+    setInputIsVisible(!newItem.isPrivate);
+    setInputItemType(newItem.type);
+    setInputLanguage(newItem.language);
+    setInputMaxPlayers(newItem.maxPlayers);
+    setInputMinPlayers(newItem.minPlayers);
+    setInputMinAge(newItem.minAge);
+    setInputPages(newItem.pages);
+    setInputPubHouse(newItem.publishingHouse);
+    setInputShelf(loadedShelfId.id)
+    setInputTitle(newItem.title);
+    setInputYear(newItem.year);
+  }
+
+  useEffect(() => {
+    if (itemId) {
+      user.shelves.find(shelf => shelf.items.find(shelfItem => {
+        if (shelfItem.id === Number(itemId)) {
+          setIsLoaded(true);
+          setItem(shelfItem);
+          setInputData(shelfItem);
+          return shelfItem;
+        }
+      }))
+    }
+  }, [isLoaded, itemId])
+
+  const shelvesOptions = user.shelves.map(shelf => <option key={shelf.id} name={shelf.id}>{shelf.id}. {shelf.name}</option>)
+
   const handleOnSubmit = event => {
     event.preventDefault();
-
-    const typeOfItem = () => {
-      if (inputItemType === "Książka") {
-        return "Book"
-      } else if (inputItemType === "Gra planszowa") {
-        return "BoardGame"
-      }
-      return "";
-    }
     
     const itemObject = {
       author: inputAuthor,
@@ -56,29 +93,51 @@ const AddOrEditItem = ({item}) => {
       description: inputDescription,
       photo: "",
       language: inputLanguage,
-      year: inputYear,
+      year: Number(inputYear),
       publishingHouse: inputPubHouse,
-      type: typeOfItem(),
-      owner: "Tymczasowy Gość",
-      ownerId: 109,
-      shelfId: 101,
+      type: inputItemType,
+      shelfId: Number(inputShelf),
       isPrivate: !inputIsVisible,
-      pages: inputPages,
-      minPlayers: inputMinPlayers,
-      maxPlayers: inputMaxPlayers,
+      pages: Number(inputPages),
+      minPlayers: Number(inputMinPlayers),
+      maxPlayers: Number(inputMaxPlayers),
       length: inputDuration,
-      minAge: inputMinAge,
-      isToLet: inputIsToLet
+      minAge: Number(inputMinAge),
+      isToLet: inputIsToLet,
+      isBorrowed: false,
     }
 
+    
+    if (item !== undefined) {
+      itemObject.id = item.id;
+      console.log(itemObject);
+      fetch(API_URL + `/item/edit/${itemObject.id}`, {
+        method: 'PUT',
+        headers: new Headers({
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(itemObject)
+      }).then(response => response.json(), () => console.error('Item cannot edit.'))
+      .then(data => dispatch(editItem(data)));
+    } else {
+      fetch(API_URL + '/item/add', {
+        method: 'post',
+        headers: new Headers({
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(itemObject)
+      }).then(response => response.json(), () => console.error('Item cannot add.'))
+      .then(data => dispatch(addItem(data)));
+    }
     // item.id ? dispatch(addItem(itemObject)) : dispatch(editItem(itemObject));
-    dispatch(addItem(itemObject))
   }
   
   const currentYear = new Date().getFullYear();
 
   const itemTypeValues = () => {
-    if (inputItemType === "Książka") {
+    if (inputItemType === "Book") {
       return (
         <>
           <label>Ilość stron:</label>
@@ -86,7 +145,7 @@ const AddOrEditItem = ({item}) => {
           <br />
         </>
       )
-    } else if (inputItemType === "Gra planszowa") {
+    } else if (inputItemType === "BoardGame") {
       return (
         <>
           <label>Minimum graczy:</label>
@@ -108,13 +167,13 @@ const AddOrEditItem = ({item}) => {
 
   return (
     <div className='addoredititem'>
-      <h2>Dodaj nowy przedmiot</h2>
+      <h2>{itemId ? "Edytuj" : "Dodaj nowy"} przedmiot</h2>
       <form className='addoredit-form' onSubmit={handleOnSubmit}>
         <label>Typ przedmiotu:</label>
         <select value={inputItemType} onChange={handleChangeItemType}>
           <option hidden></option>
-          <option name="Book">Książka</option>
-          <option name="BoardGame">Gra planszowa</option>
+          <option value="Book">Książka</option>
+          <option value="BoardGame">Gra planszowa</option>
         </select>
         <br />
         <label>Tytuł:</label>
@@ -122,6 +181,11 @@ const AddOrEditItem = ({item}) => {
         <br />
         <label>Autor:</label>
         <input type="text" value={inputAuthor} onChange={handleChangeAuthor}/>
+        <br />
+        <label>Typ przedmiotu:</label>
+        <select value={inputShelf} onChange={handleChangeShelf}>
+          {shelvesOptions}
+        </select>
         <br />
         <label>Rok wydania:</label>
         <input type="number" min="1900" max={currentYear} value={inputYear} onChange={handleChangeYear}/>
@@ -147,7 +211,7 @@ const AddOrEditItem = ({item}) => {
           onChange={handleChangeDescription}
         />
         <br />
-        <button type='submit'>Dodaj</button>
+        <button type='submit'>{itemId ? "Edytuj" : "Dodaj"}</button>
       </form>
     </div>
   )

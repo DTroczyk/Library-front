@@ -8,6 +8,7 @@ const SmallItem = ({item}) => {
 
   const handleEditClick = (event) => {
     event.stopPropagation();
+    navigate(`./edit/${item.id}`);
   }
   const handleDeleteClick = (event) => {
     event.stopPropagation();

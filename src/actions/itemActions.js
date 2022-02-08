@@ -54,48 +54,10 @@ export const deleteItem = id => ({
   }
 })
 
-export const editItem = ({
-  author,
-  id,
-  title,
-  description,
-  photo,
-  language,
-  year,
-  publishingHouse,
-  type,
-  owner,
-  ownerId,
-  shelfId,
-  isPrivate,
-  pages,
-  minPlayers,
-  maxPlayers,
-  length,
-  minAge,
-  isToLet,
-}) => ({
+export const editItem = (item) => ({
   type: ITEM_EDIT,
   payload: {
-    author,
-    id,
-    title,
-    description,
-    photo,
-    language,
-    year,
-    publishingHouse,
-    type,
-    owner,
-    ownerId,
-    shelfId,
-    isPrivate,
-    pages,
-    minPlayers,
-    maxPlayers,
-    length,
-    minAge,
-    isToLet,
+    item
   }
 })
 
