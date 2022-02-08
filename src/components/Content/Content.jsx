@@ -32,7 +32,7 @@ const Content = () => {
     if (token != null) {
       const user = jwtDecode(token);
 
-      if (user.exp > Date.now()) {
+      if (user.exp < Date.now() / 1000) {
         localStorage.removeItem('token');
       }
       else {
