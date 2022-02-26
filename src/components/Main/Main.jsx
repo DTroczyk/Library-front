@@ -1,18 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
+import useApi from '../../hooks/useApi';
 
 import Item from '../Item/Item';
 
 import './Main.css'
 
 const Main = () => {
-  const items = useSelector(store => store.items);
+  const data = useApi()
   const navigate = useNavigate();
 
   const details = itemId => navigate(`/item/${itemId}`);
 
-  const itemList = items.map(current => <Item key={current.id} item={current} details={details}/>)
+  const itemList = data.isLoading ? "Ładowanie ...": data.data.map(current => <Item key={current.id} item={current} details={details}/>)
 
   return (
     <div>

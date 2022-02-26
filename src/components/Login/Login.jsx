@@ -42,16 +42,7 @@ const Login = () => {
       }).then(data => {
         var token = data.token;
         localStorage.setItem('token', token);
-        navigate('/');
-        return localStorage.getItem('token');
-      }).then(token => {
-        fetch(API_URL + '/user', {
-          method: 'get',
-          headers: new Headers({
-            'Authorization': 'Bearer ' + token
-          })
-        }).then(response => response.json())
-        .then(data => dispatch(loginUser(data)));
+        navigate('/panel');
       })
       .catch(er => console.log("Access Denied"));
   }
