@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import useApi from '../../hooks/useApi'
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 
 import './UserPanel.css'
 
@@ -18,7 +19,7 @@ const UserPanel = () => {
   }, []);
 
   return (
-    data.isLoading ? "Ładowanie ..." :
+    data.isLoading ? <LoadingIndicator/> :
     <div className='panel'>
       <div className='panel-menu'>
         <div><NavLink to="/panel/items">Przedmioty</NavLink></div>

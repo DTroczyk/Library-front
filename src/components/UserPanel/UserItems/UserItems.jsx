@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom';
-import Shelf from '../Shelf/Shelf';
+import Shelf from './Shelf/Shelf';
 
 const UserItems = () => {
   const user = useSelector(store => store.user);

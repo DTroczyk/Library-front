@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { addItem, editItem } from '../../actions/itemActions';
-import { API_URL } from '../../temp/TempURL';
+import { addItem, editItem } from '../../../actions/itemActions';
+import { API_URL } from '../../../temp/TempURL';
 
 import "./AddOrEditItem.css"
 
@@ -110,7 +110,6 @@ const AddOrEditItem = () => {
     
     if (item !== undefined) {
       itemObject.id = item.id;
-      console.log(itemObject);
       fetch(API_URL + `/item/edit/${itemObject.id}`, {
         method: 'PUT',
         headers: new Headers({
@@ -131,7 +130,6 @@ const AddOrEditItem = () => {
       }).then(response => response.json(), () => console.error('Item cannot add.'))
       .then(data => dispatch(addItem(data)));
     }
-    // item.id ? dispatch(addItem(itemObject)) : dispatch(editItem(itemObject));
   }
   
   const currentYear = new Date().getFullYear();

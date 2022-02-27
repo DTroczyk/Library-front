@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteItem } from '../../actions/itemActions';
-import { API_URL } from '../../temp/TempURL';
+import { deleteItem } from '../../../../../actions/itemActions';
+import { API_URL } from '../../../../../temp/TempURL';
 
 import './SmallItem.css'
 
