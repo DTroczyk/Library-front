@@ -2,7 +2,8 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import useApi from '../../hooks/useApi';
 
-import Item from '../Item/Item';
+import Item from './Item/Item';
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 
 import './Main.css'
 
@@ -12,7 +13,7 @@ const Main = () => {
 
   const details = itemId => navigate(`/item/${itemId}`);
 
-  const itemList = data.isLoading ? "Ładowanie ...": data.data.map(current => <Item key={current.id} item={current} details={details}/>)
+  const itemList = data.isLoading ? <LoadingIndicator/>: data.data.map(current => <Item key={current.id} item={current} details={details}/>)
 
   return (
     <div>
