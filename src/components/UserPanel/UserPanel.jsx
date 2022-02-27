@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import useApi from '../../hooks/useApi'
-import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 
 import './UserPanel.css'
 
 const UserPanel = () => {
   const navigate = useNavigate()
-  const data = useApi();
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -19,10 +15,10 @@ const UserPanel = () => {
   }, []);
 
   return (
-    data.isLoading ? <LoadingIndicator/> :
     <div className='panel'>
       <div className='panel-menu'>
         <div><NavLink to="/panel/items">Przedmioty</NavLink></div>
+        <div><NavLink to="/panel/addItem">Dodaj przedmiot</NavLink></div>
         <div><NavLink to="/panel/loans">Zapytania</NavLink></div>
         <div><NavLink to="/panel/setting">Ustawienia</NavLink></div>
       </div>

@@ -2,7 +2,7 @@ import './LoadingIndicator.css'
 
 const LoadingIndicator = () => {
   return (
-    <div class="lds-dual-ring"></div>
+    <div className="lds-dual-ring"></div>
   )
 }
 

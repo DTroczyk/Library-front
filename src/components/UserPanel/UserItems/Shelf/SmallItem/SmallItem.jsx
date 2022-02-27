@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { deleteItem } from '../../../../../actions/itemActions';
 import { API_URL } from '../../../../../temp/TempURL';
 
+import bookImage from '../../../../../assets/default-book-image.png'
+import gameImage from '../../../../../assets/default-game-image.png'
+
 import './SmallItem.css'
 
 const SmallItem = ({item}) => {
@@ -12,7 +15,7 @@ const SmallItem = ({item}) => {
 
   const handleEditClick = (event) => {
     event.stopPropagation();
-    navigate(`./edit/${item.id}`);
+    navigate(`../editItem/${item.id}`);
   }
   const handleDeleteClick = (event) => {
     fetch(API_URL + `/item/delete/${item.id}`, {
@@ -26,10 +29,24 @@ const SmallItem = ({item}) => {
     event.stopPropagation();
   }
 
+  const image = () => {
+    switch (item.type) {
+      case 'BoardGame':
+        return gameImage
+      case 'Book':
+        return bookImage
+      default:
+        return ''
+    }
+  }
+
   return (
     <div className='small-item' onClick={() => navigate(`${item.id}`)}>
       <div className='small-item-id'>
         {item.id}.
+      </div>
+      <div className='small-item-image'>
+        <img src={image()} alt='Okładka'/>
       </div>
       <div className='small-item-title'>
         {item.title}

@@ -5,7 +5,6 @@ export const itemReducer = (state = [], action) => {
     case ITEM_ADD:
       return [...state, action.payload];
     case ITEM_EDIT:
-      console.log(action.payload.item);
       return state.map(currentStateElement => {
         if (currentStateElement.id !== action.payload.item.id) {
           return currentStateElement;

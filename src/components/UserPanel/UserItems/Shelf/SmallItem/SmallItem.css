@@ -11,6 +11,17 @@
   margin: 2px;
 }
 
+.small-item-image {
+  height: 20px;
+  width: 20px;
+  margin-top: 2px;
+}
+
+.small-item-image > img {
+  max-height: 20px;
+  max-width: 20px;
+}
+
 .small-item-title {
   width: 100%;
   text-align: left;

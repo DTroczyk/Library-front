@@ -3,22 +3,24 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom';
+import useApi, { useUser } from '../../../hooks/useApi';
+import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
 import Shelf from './Shelf/Shelf';
 
 const UserItems = () => {
-  const user = useSelector(store => store.user);
-  const shelves = user.shelves;
+  const user = useUser();
+  const shelves = user.isLoading ? [] : user.data.shelves;
   const [userItems, setUserItems] = useState([]);
 
   useEffect(() => {
     if (shelves) {
       setUserItems(shelves.map(shelf => <Shelf key={shelf.id} shelf={shelf}/>));
     }
-  }, [user])
+  }, [setUserItems, user.isLoading])
 
   return (
     <div>
-      {userItems}
+      {user.isLoading ? <LoadingIndicator/> : userItems}
       <Outlet/>
     </div>
   )

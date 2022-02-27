@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import useApi from '../../hooks/useApi';
+import { useItems } from '../../hooks/useApi';
 
 import Item from './Item/Item';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
@@ -8,12 +8,12 @@ import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 import './Main.css'
 
 const Main = () => {
-  const data = useApi()
+  const items = useItems()
   const navigate = useNavigate();
 
   const details = itemId => navigate(`/item/${itemId}`);
 
-  const itemList = data.isLoading ? <LoadingIndicator/>: data.data.map(current => <Item key={current.id} item={current} details={details}/>)
+  const itemList = items.isLoading ? <LoadingIndicator/> : items.data.map(current => <Item key={current.id} item={current} details={details}/>)
 
   return (
     <div>

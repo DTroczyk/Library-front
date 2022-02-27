@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { addItem, editItem } from '../../../actions/itemActions';
 import { API_URL } from '../../../temp/TempURL';
@@ -14,6 +14,7 @@ const AddOrEditItem = () => {
   const [item, setItem] = useState(undefined);
   const user = useSelector(store => store.user);
   const {itemId} = useParams();
+  const navigate = useNavigate();
 
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputDescription, setInputDescription] = useState("");
@@ -118,7 +119,8 @@ const AddOrEditItem = () => {
         }),
         body: JSON.stringify(itemObject)
       }).then(response => response.json(), () => console.error('Item cannot edit.'))
-      .then(data => dispatch(editItem(data)));
+      .then(data => dispatch(editItem(data)))
+      .then(() => navigate('/panel/items'));
     } else {
       fetch(API_URL + '/item/add', {
         method: 'post',
@@ -128,7 +130,8 @@ const AddOrEditItem = () => {
         }),
         body: JSON.stringify(itemObject)
       }).then(response => response.json(), () => console.error('Item cannot add.'))
-      .then(data => dispatch(addItem(data)));
+      .then(data => dispatch(addItem(data)))
+      .then(() => navigate('/panel/items'));
     }
   }
   

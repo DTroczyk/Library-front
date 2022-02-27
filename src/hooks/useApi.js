@@ -8,22 +8,18 @@ import { loginUser } from "../actions/userActions";
 const API_URL = 'https://localhost:44303';
 
 const useApi = () => {
+  useUser();
+  useItems();
+}
+
+export const useUser = () => {
   const [response, setResponse] = useState({data: null, isLoading: true, error: null});
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const token = localStorage.getItem('token')
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setResponse({data: null, isLoading: true, error: null});
-    fetch(API_URL + '/item')
-      .then((res) => res.json())
-      .then((data) => {
-        setResponse({data, isLoading: false, error: null});
-        dispatch(setItems(data));
-      }).catch((error) => setResponse({data: null, isLoading: false, error}))
-  }, [setResponse])
-
   useEffect(() =>{
+    setResponse({data: null, isLoading: true, error: null});
     if (token != null) {
       const user = jwtDecode(token);
 
@@ -37,10 +33,35 @@ const useApi = () => {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
           })
         }).then(response => response.json())
-        .then(data => dispatch(loginUser(data)));
+        .then(data => {
+          dispatch(loginUser(data));
+          setResponse({data, isLoading: false, error: null})
+        })
+        .catch(error => {
+          console.error(error);
+          setResponse({data: [], isLoading: false, error});
+        });
       }
     }
-  }, [token])
+  }, [token, setResponse])
+
+  return response;
+}
+
+export const useItems = () => {
+  const [response, setResponse] = useState({data: null, isLoading: true, error: null});
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setResponse({data: null, isLoading: true, error: null});
+    fetch(API_URL + '/item')
+      .then((res) => res.json())
+      .then((data) => {
+        setResponse({data, isLoading: false, error: null});
+        dispatch(setItems(data));
+      }).catch((error) => setResponse({data: [], isLoading: false, error}))
+  }, [setResponse])
 
   return response;
 }

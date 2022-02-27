@@ -1,16 +1,16 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import useApi, { useSetItems } from '../../hooks/useApi';
+import useApi from '../../hooks/useApi';
 
-import AddOrEditItem from '../AddOrEditItem/AddOrEditItem';
+import AddOrEditItem from '../UserPanel/AddOrEditItem/AddOrEditItem';
 import Login from '../Login/Login';
 import ItemDetails from '../ItemDetails/ItemDetails';
 import Main from '../Main/Main';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Register from '../Register/Register';
 import UserPanel from '../UserPanel/UserPanel';
-import UserItems from '../UserItems/UserItems';
+import UserItems from '../UserPanel/UserItems/UserItems';
 
 const Content = () => {
   useApi();
@@ -27,10 +27,11 @@ const Content = () => {
         <Route element={<UserPanel/>} path="panel">
           <Route path="items" element={<UserItems/>}>
             <Route path=":itemId" element={<ItemDetails/>}/>
-            <Route path="edit/:itemId" element={<AddOrEditItem/>}/>
           </Route>
-          <Route path="setting" element={<Register/>}/>
-          <Route path="loans" element={<AddOrEditItem/>}/>
+          <Route path="editItem/:itemId" element={<AddOrEditItem/>}/>
+          <Route path="addItem" element={<AddOrEditItem/>}/>
+          <Route path="setting" element={<div/>}/>
+          <Route path="loans" element={<div/>}/>
         </Route>
         <Route element={<NotFoundPage/>} path="/*"/>
       </Routes>
