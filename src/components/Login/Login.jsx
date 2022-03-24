@@ -53,14 +53,16 @@ const Login = () => {
     <section className='login'>
       <h2>Zaloguj się</h2>
       <form onSubmit={handleOnSubmit} className='login-form'>
-        <label htmlFor="">Login:</label>
-        <input type="text" onChange={handleLoginChange} value={usernameInput}/>
-        <br/>
-        <label htmlFor="">Hasło:</label>
-        <input type="password" onChange={handlePasswordChange} value={passwordInput}/>
-        <br/>
-        <button type='button' onClick={handleForgotPassword}>Przypomnij hasło</button>
-        <button type='submit'>Zaloguj</button>
+        <label>Login:
+          <input type="text" onChange={handleLoginChange} value={usernameInput}/>
+        </label>
+        <label>Hasło:
+          <input type="password" onChange={handlePasswordChange} value={passwordInput}/>
+        </label>
+        <div className='login-form-buttons'>
+          <button type='button' onClick={handleForgotPassword}>Przypomnij hasło</button>
+          <button type='submit'>Zaloguj</button>
+        </div>
       </form>
     </section>
   )

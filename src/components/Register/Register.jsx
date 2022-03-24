@@ -47,27 +47,41 @@ const Register = () => {
     <section className='register'>
       <h2>Zarejestruj się</h2>
       <form onSubmit={handleOnSubmit} className='register-form'>
-        <label>Nazwa użytkownika:</label>
-        <input type='text' value={inputUsername} onChange={handleUsernameChange}/>
-        <br/>
-        <label>Email:</label>
-        <input type='email' value={inputEmail} onChange={handleEmailChange}/>
-        <br/>
-        <label>Powtórz email:</label>
-        <input type='email' value={inputEmailRepeat} onChange={handleEmailRepeatChange}/>
-        <br/>
-        <label>Hasło:</label>
-        <input type='password' value={inputPassword} onChange={handlePasswordChange}/>
-        <br/>
-        <label>Powtórz hasło:</label>
-        <input type='password' value={inputPasswordRepeat} onChange={handlePasswordRepeatChange}/>
-        <br/>
-        <label>Imię:</label>
-        <input type='text' value={inputName} onChange={handleNameChange}/>
-        <br/>
-        <label>Nazwisko:</label>
-        <input type='text' value={inputSurname} onChange={handleSurnameChange}/>
-        <br/>
+        <div className="register-form-row">
+          <label>Nazwa użytkownika:
+            <input type='text' value={inputUsername} onChange={handleUsernameChange}/>
+          </label>
+        </div>
+        <div className="register-form-row">
+          <label>Email:
+            <input type='email' value={inputEmail} onChange={handleEmailChange}/>
+          </label>
+        </div>
+        <div className="register-form-row">
+          <label>Powtórz email:
+            <input type='email' value={inputEmailRepeat} onChange={handleEmailRepeatChange}/>
+          </label>
+        </div>
+        <div className="register-form-row">
+          <label>Hasło:
+            <input type='password' value={inputPassword} onChange={handlePasswordChange}/>
+          </label>
+        </div>
+        <div className="register-form-row">
+          <label>Powtórz hasło:
+            <input type='password' value={inputPasswordRepeat} onChange={handlePasswordRepeatChange}/>
+          </label>
+        </div>
+        <div className="register-form-row">
+          <label>Imię:
+            <input type='text' value={inputName} onChange={handleNameChange}/>
+          </label>
+        </div>
+        <div className="register-form-row">
+          <label>Nazwisko:
+            <input type='text' value={inputSurname} onChange={handleSurnameChange}/>
+          </label>
+        </div>
         <button type='submit'>Zarejestruj</button>
       </form>
     </section>
