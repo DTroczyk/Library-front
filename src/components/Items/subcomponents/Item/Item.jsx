@@ -2,8 +2,8 @@ import React from 'react'
 
 import './Item.css'
 
-import bookImage from '../../../assets/default-book-image.png'
-import gameImage from '../../../assets/default-game-image.png'
+import bookImage from '../../../../assets/default-book-image.png'
+import gameImage from '../../../../assets/default-game-image.png'
 
 const Item = props => {
   const {item, details} = props;

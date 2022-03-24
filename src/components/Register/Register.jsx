@@ -44,7 +44,7 @@ const Register = () => {
   }
 
   return (
-    <div className='register'>
+    <section className='register'>
       <h2>Zarejestruj się</h2>
       <form onSubmit={handleOnSubmit} className='register-form'>
         <label>Nazwa użytkownika:</label>
@@ -70,7 +70,7 @@ const Register = () => {
         <br/>
         <button type='submit'>Zarejestruj</button>
       </form>
-    </div>
+    </section>
   )
 }
 

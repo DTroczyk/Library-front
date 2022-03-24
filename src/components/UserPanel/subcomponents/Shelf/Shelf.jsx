@@ -1,5 +1,5 @@
 import React from 'react'
-import SmallItem from './SmallItem/SmallItem'
+import SmallItem from '../SmallItem/SmallItem'
 
 import './Shelf.css'
 

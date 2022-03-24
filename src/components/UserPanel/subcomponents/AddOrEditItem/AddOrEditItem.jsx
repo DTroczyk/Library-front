@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { addItem, editItem } from '../../../actions/itemActions';
-import { API_URL } from '../../../temp/TempURL';
+import { addItem, editItem } from '../../../../actions/itemActions';
+import { API_URL } from '../../../../temp/TempURL';
 
 import "./AddOrEditItem.css"
 

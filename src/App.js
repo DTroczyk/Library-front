@@ -13,8 +13,10 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Header/>
-        <Content/>
+        <div className='content-wrapper'>
+          <Header/>
+          <Content/>
+        </div>
       </Router>
     </Provider>
   );

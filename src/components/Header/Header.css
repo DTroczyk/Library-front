@@ -3,32 +3,32 @@ header {
   padding-bottom: 5px;
 }
 
-nav {
+.header-banner {
+  text-align: center;
+  font-size: 40px;
+}
+
+nav > ul {
   margin: 5px 0;
   text-align: center;
   display: inline-flex;
   width: 100%;
-
+  margin: 0;
+  padding: 0;
 }
 
-nav > div {
+nav > ul > li {
   width: 100%;
   display: flex;
-
 }
 
-nav > div > a {
+nav > ul > li > a {
   font-size: 20px;
   text-decoration: none;
   width: 100%;
 }
 
-nav > div > a:hover {
+nav > ul > li > a:hover {
   background-color: #eee;
   transition-duration: 0.5s;
-}
-
-#banner {
-  text-align: center;
-  font-size: 40px;
 }

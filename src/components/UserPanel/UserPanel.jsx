@@ -15,9 +15,10 @@ const UserPanel = () => {
   }, []);
 
   return (
-    <div className='panel'>
+    <section className='panel'>
       <div className='panel-menu'>
         <div><NavLink to="/panel/items">Przedmioty</NavLink></div>
+        <div><NavLink to="/panel/addShelf">Dodaj półkę</NavLink></div>
         <div><NavLink to="/panel/addItem">Dodaj przedmiot</NavLink></div>
         <div><NavLink to="/panel/loans">Zapytania</NavLink></div>
         <div><NavLink to="/panel/setting">Ustawienia</NavLink></div>
@@ -25,7 +26,7 @@ const UserPanel = () => {
       <div className='panel-content'>
         <Outlet/>
       </div>
-    </div>
+    </section>
   )
 }
 

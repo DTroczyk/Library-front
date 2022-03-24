@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteItem } from '../../../../../actions/itemActions';
-import { API_URL } from '../../../../../temp/TempURL';
+import { deleteItem } from '../../../../actions/itemActions';
+import { API_URL } from '../../../../temp/TempURL';
 
-import bookImage from '../../../../../assets/default-book-image.png'
-import gameImage from '../../../../../assets/default-game-image.png'
+import bookImage from '../../../../assets/default-book-image.png'
+import gameImage from '../../../../assets/default-game-image.png'
 
 import './SmallItem.css'
 

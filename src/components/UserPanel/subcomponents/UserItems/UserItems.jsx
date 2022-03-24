@@ -1,11 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom';
-import useApi, { useUser } from '../../../hooks/useApi';
-import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
-import Shelf from './Shelf/Shelf';
+import { useUser } from '../../../../hooks/useApi';
+import LoadingIndicator from '../../../LoadingIndicator/LoadingIndicator';
+import Shelf from '../Shelf/Shelf';
 
 const UserItems = () => {
   const user = useUser();

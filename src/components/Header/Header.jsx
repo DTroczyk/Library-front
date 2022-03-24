@@ -20,15 +20,15 @@ const Header = () => {
     if (user.username) {
       return (
         <>
-          <div><Link to='/panel/items'>Panel</Link></div>
-          <div><Link to='/' onClick={handleClick}>Wyloguj</Link></div>
+          <li><Link to='/panel/items'>Panel</Link></li>
+          <li><Link to='/' onClick={handleClick}>Wyloguj</Link></li>
         </>
       )
     } else {
       return (
         <>
-          <div><Link to='/login'>Logowanie</Link></div>
-          <div><Link to='/register'>Rejestracja</Link></div>
+          <li><Link to='/login'>Logowanie</Link></li>
+          <li><Link to='/register'>Rejestracja</Link></li>
         </>
       )
     }
@@ -36,13 +36,14 @@ const Header = () => {
 
   return (
     <header>
-      <div id="banner">
+      <div className="header-banner">
         <Link to='/'>Biblioteka</Link>
       </div>
       <nav>
-          <div><Link to='/'>Strona Główna</Link></div>
-          {/* <div><Link to='/additem'>Dodaj przedmiot</Link></div> */}
+        <ul>
+          <li><Link to='/'>Strona Główna</Link></li>
           {isUserLogged()}
+        </ul>
       </nav>
     </header>
   )

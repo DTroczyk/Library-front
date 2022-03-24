@@ -50,7 +50,7 @@ const Login = () => {
 
 
   return (
-    <div className='login'>
+    <section className='login'>
       <h2>Zaloguj się</h2>
       <form onSubmit={handleOnSubmit} className='login-form'>
         <label htmlFor="">Login:</label>
@@ -62,7 +62,7 @@ const Login = () => {
         <button type='button' onClick={handleForgotPassword}>Przypomnij hasło</button>
         <button type='submit'>Zaloguj</button>
       </form>
-    </div>
+    </section>
   )
 }
 
